@@ -1,7 +1,4 @@
-const dotenv = require('dotenv');
-dotenv.config();
-
-BASE_URL = process.env.BASE_URL;
+const BASE_URL = "https://backroomsbridge.onrender.com/api";
 
 // Fetch a single mall by ID
 export const fetchMallById = async (id) => {

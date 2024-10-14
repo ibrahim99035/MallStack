@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+const BASE_URL = "https://backroomsbridge.onrender.com/api";
 
 // Fetch all stores
 export const fetchStores = async () => {
