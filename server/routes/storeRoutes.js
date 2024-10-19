@@ -6,6 +6,7 @@ const {
     getStoreById,
     updateStore,
     deleteStore,
+    getStoresByMall,
     upload,
 } = require('../controllers/storeController');
 const { protect } = require('../middleware/authMiddleware');
@@ -16,6 +17,7 @@ const router = express.Router();
 // Public routes
 router.get('/', getStores);
 router.get('/:id', getStoreById);
+router.get('/mall/:mallId', getStoresByMall);
 
 // Protected routes for admins
 router.post('/', protect, authorizeRoles('admin'), upload.single('coverImage'), createStore);

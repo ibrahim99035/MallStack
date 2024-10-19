@@ -5,7 +5,7 @@ import HeroSection from '../components/Other/HeroSection';
 import Up from '../components/Other/Up';
 import MallProfile from '../components/Mall/MallProfile';
 
-const HomePage = () => {
+const MallProfilePage = () => {
     const selectedMall = {
         name: "مول الضجيج",
         address: "123 الضجيج, الجهراء, الكويت",
@@ -84,4 +84,4 @@ const HomePage = () => {
 
 };
 
-export default HomePage;
+export default MallProfilePage;

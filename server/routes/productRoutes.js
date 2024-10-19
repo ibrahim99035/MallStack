@@ -6,6 +6,7 @@ const {
     getProductById,
     updateProduct,
     deleteProduct,
+    getProductsByStore,
     upload,
 } = require('../controllers/productController');
 const { protect } = require('../middleware/authMiddleware');
@@ -16,6 +17,7 @@ const router = express.Router();
 // Public routes
 router.get('/', getProducts);
 router.get('/:id', getProductById);
+router.get('/store/:storeId', getProductsByStore);
 
 // Protected routes for creating, updating, and deleting products
 router.post('/', protect, authorizeRoles('admin', 'moderator'), upload.single('coverImage'), createProduct);

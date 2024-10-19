@@ -1,17 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
 import { useParams } from 'react-router-dom';
 
 import { FaArrowCircleDown } from "react-icons/fa";
 
+import { fetchProducts } from '../../API/product/getproducts';
+import { fetchProductById } from '../../API/product/getproduct';
+
 import '../../CSS/StoreProfile.css';
 
 import Products from '../Product/CardGrid';
+import CustomModal from '../../dashboard/Admin/components/CustomModal';
 
 const StoreProfile = () => {
+
+    const [products, setProducts] = useState([]);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+
+    useEffect(() => {
+        fetchTheProducts();
+    }, []);
+
+    const fetchTheProducts = async () => {
+        const data = await fetchProducts();
+        setProducts(data);
+    };
+    
     const { id } = useParams();  // Get the id from the route
 
     // Hardcoded store data for now
-    const stores = [
+    const persoudo_stores = [
         { id: 1, name: "المحل الأول", description: "وصف المحل الأول", address: "الدور الاول", openingTime: "10:00 AM", closingTime: "9:00 PM", image: "https://media.timeout.com/images/103333354/750/562/image.jpg" },
         { id: 2, name: "المحل الثاني", description: "وصف المحل الثاني", address: "الدور الثاني", openingTime: "10:00 AM", closingTime: "9:00 PM", image: "https://media.timeout.com/images/103333357/750/422/image.jpg" },
         { id: 3, name: "المحل الثالث", description: "وصف المحل الثالث", address: "الدور الثالث", openingTime: "10:00 AM", closingTime: "9:00 PM", image: "https://media.timeout.com/images/103333357/750/422/image.jpg" },
@@ -21,7 +39,7 @@ const StoreProfile = () => {
     ];
 
     // Find the store by id
-    const store = stores.find(store => store.id === parseInt(id));
+    const store = persoudo_stores.find(store => store.id === parseInt(id));
 
     if (!store) {
         return <h2>Store not found</h2>;  // Handle case when store is not found

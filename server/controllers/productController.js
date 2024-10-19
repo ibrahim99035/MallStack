@@ -8,8 +8,8 @@ const path = require('path');
 
 // Cloudinary Configuration
 cloudinary.config({ 
-    cloud_name: 'dbthng8q2', 
-    api_key: '349181398314425', 
+    cloud_name: process.env.CLOUD_NAME, 
+    api_key: process.env.CLOUD_API_KEY, 
     api_secret: process.env.CLOUDINARY_API_SECRET 
 });
 
@@ -128,11 +128,31 @@ const deleteProduct = async (req, res) => {
     }
 };
 
+// Fetch products by store ID
+const getProductsByStore = async (req, res) => {
+    const storeId = req.params.storeId; // Get store ID from route parameters
+
+    try {
+        const products = await Product.find({ relatedStore: storeId })
+            .populate('relatedStore', 'name') // Populate store details if needed
+            .populate('createdBy', 'name'); // Populate the creator details if needed
+
+        if (products.length > 0) {
+            res.json(products);
+        } else {
+            res.status(404).json({ message: 'No products found for this store' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching products for this store', error });
+    }
+};
+
 module.exports = {
     createProduct,
     getProducts,
     getProductById,
     updateProduct,
     deleteProduct,
+    getProductsByStore,
     upload,
 };

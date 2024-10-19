@@ -10,8 +10,8 @@ const path = require('path');
 
 // Cloudinary Configuration
 cloudinary.config({ 
-    cloud_name: 'dbthng8q2', 
-    api_key: '349181398314425', 
+    cloud_name: process.env.CLOUD_NAME, 
+    api_key: process.env.CLOUD_API_KEY, 
     api_secret: process.env.CLOUDINARY_API_SECRET 
 });
 
@@ -84,31 +84,42 @@ const getMallById = async (req, res) => {
 const updateMall = async (req, res) => {
     const { name, location, address, openingDate, closingDate } = req.body;
 
+    // Fetch the mall to update
     const mall = await Mall.findById(req.params.id);
-    
-    if (mall) {
-        mall.name = name || mall.name;
-        mall.location = location || mall.location;
-        mall.address = address || mall.address;
-        mall.openingDate = openingDate || mall.openingDate;
-        mall.closingDate = closingDate || mall.closingDate;
 
-        if (req.file) {
-            try {
-                const uploadResult = await cloudinary.uploader.upload(req.file.path, {
-                    public_id: `malls/${Date.now()}-${req.file.originalname}`, // Optional: specify a public ID
-                });
-                mall.coverImage = uploadResult.secure_url; // Get the secure URL of the uploaded image
-                fs.unlinkSync(req.file.path); // Optional: delete the image after uploading
-            } catch (error) {
-                return res.status(500).json({ message: 'Error uploading image to Cloudinary', error });
-            }
+    if (!mall) {
+        return res.status(404).json({ message: 'Mall not found' });
+    }
+
+    // Update fields if provided
+    mall.name = name || mall.name;
+    mall.location = location || mall.location;
+    mall.address = address || mall.address;
+    mall.openingDate = openingDate || mall.openingDate;
+    mall.closingDate = closingDate || mall.closingDate;
+
+    // Retain the existing `createdBy` field if not provided
+    mall.createdBy = mall.createdBy || req.user._id; // Assuming req.user contains the authenticated user's data
+
+    // If file exists, upload to Cloudinary
+    if (req.file) {
+        try {
+            const uploadResult = await cloudinary.uploader.upload(req.file.path, {
+                public_id: `malls/${Date.now()}-${req.file.originalname}`,
+            });
+            mall.coverImage = uploadResult.secure_url; // Get the secure URL of the uploaded image
+            fs.unlinkSync(req.file.path); // Optional: delete the image after uploading
+        } catch (error) {
+            return res.status(500).json({ message: 'Error uploading image to Cloudinary', error });
         }
+    }
 
+    // Save updated mall
+    try {
         const updatedMall = await mall.save();
         res.json(updatedMall);
-    } else {
-        res.status(404).json({ message: 'Mall not found' });
+    } catch (error) {
+        res.status(400).json({ message: 'Error updating mall', error });
     }
 };
 
