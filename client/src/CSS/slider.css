@@ -67,3 +67,13 @@
   align-items: center;
   justify-content: center;
 }
+
+@media (max-width: 768px) {
+  .partener-image-div{
+    margin-right: 50px;
+  }
+
+  .partener-image-div img{
+    max-width: 50%;
+  }
+}

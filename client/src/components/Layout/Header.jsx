@@ -17,9 +17,8 @@ const Header = () => {
         <ul>
           <li><a href="/">الرئيسية</a></li>
           <li><a href="/about-us">عنا</a></li>
-          <li><a href="#services">الخدمات</a></li>
           <li><a href="/contact-us">تواصل معنا</a></li>
-          <li><a href="#about">المعارض</a></li>
+          <li><a href="/malls">المعارض</a></li>
         </ul>
       </nav>
       <div className="menu-toggle" onClick={toggleMenu}>

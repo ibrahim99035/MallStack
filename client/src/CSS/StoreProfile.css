@@ -39,3 +39,9 @@
     width: 97%;
     margin: auto;
 }
+
+@media (max-width: 768px) {
+    .store-profile{
+        max-width: 97%;
+    }
+}

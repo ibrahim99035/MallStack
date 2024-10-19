@@ -6,7 +6,7 @@
     align-items: center;
     justify-content: center;
     color: #fff; /* Text color for contrast */
-    z-index: 1000;
+    z-index: 999;
   }
 
 .hero p{

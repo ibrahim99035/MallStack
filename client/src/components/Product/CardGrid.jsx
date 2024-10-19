@@ -28,11 +28,11 @@ const CardGrid = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div id='loadingDiv'>Loading...</div>;
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div id='errorDiv'>Error: {error}</div>;
   }
 
   return (
@@ -48,7 +48,7 @@ const CardGrid = () => {
           />
         ))}
       </div>
-      <a href="#get-started" className="slider-button">المزيد</a>
+      <a href="/malls" className="slider-button">المزيد</a>
     </div>
   );
 };

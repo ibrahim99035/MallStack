@@ -52,7 +52,7 @@ const MallSlider = () => {
           <img src="https://www.ulcdn.net/media/furniture-stores/coimbatore/avinashiroad/Avinashi-Road-TN-store-mobile.jpg?1683050227" alt="Slide 5" />
         </div>
       </Slider>
-      <a href="#get-started" className="slider-button">المزيد</a>
+      <a href="/malls" className="slider-button">المزيد</a>
     </div>
   );
 };
