@@ -21,6 +21,7 @@ const HomePage = () => {
                 openingTime: "10:00 AM",
                 closingTime: "9:00 PM",
                 image: "https://media.timeout.com/images/103333354/750/562/image.jpg",
+                id:1,
             },
             {
                 name: "المحل الثاني",
@@ -29,6 +30,7 @@ const HomePage = () => {
                 openingTime: "10:00 AM",
                 closingTime: "9:00 PM",
                 image: "https://media.timeout.com/images/103333357/750/422/image.jpg",
+                id:2,
             },
             {
               name: "المحل الثالث",
@@ -37,6 +39,7 @@ const HomePage = () => {
               openingTime: "10:00 AM",
               closingTime: "9:00 PM",
               image: "https://media.timeout.com/images/103333357/750/422/image.jpg",
+              id:3,
             },
             {
               name: "المحل الرابع",
@@ -45,6 +48,7 @@ const HomePage = () => {
               openingTime: "10:00 AM",
               closingTime: "9:00 PM",
               image: "https://media.timeout.com/images/103333357/750/422/image.jpg",
+              id:4,
             },
             {
               name: "المحل الخامس",
@@ -53,6 +57,7 @@ const HomePage = () => {
               openingTime: "10:00 AM",
               closingTime: "9:00 PM",
               image: "https://media.timeout.com/images/103333357/750/422/image.jpg",
+              id:5,
             },
             {
                 name: "المحل السادس",
@@ -61,6 +66,7 @@ const HomePage = () => {
                 openingTime: "10:00 AM",
                 closingTime: "9:00 PM",
                 image: "https://media.timeout.com/images/103333357/750/422/image.jpg",
+                id:6,
             },
             
         ],

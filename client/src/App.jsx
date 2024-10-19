@@ -24,9 +24,8 @@ import ProductsPage from './dashboard/Admin/Pages/Products';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 
-
-
 import MallProfile from './pages/MallProfilePage';
+import StoreProfile from './pages/StoreProfilePage';
 
 function App() {
 
@@ -35,14 +34,7 @@ function App() {
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
-            <Route
-              path='/'
-              element = {
-                <>
-                  <HomePage />
-                </>
-              }
-            />
+            <Route path='/' element = {<><HomePage /></>}/>
 
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/dashboard/users" element={<UsersPage />} />
@@ -50,23 +42,10 @@ function App() {
             <Route path="/dashboard/stores" element={<StoresPage />} />
             <Route path="/dashboard/products" element={<ProductsPage />} />
 
-            <Route
-              path='/auth'
-              element = {
-                <>
-                  <Auth />
-                </>
-              }
-            />
+            <Route path='/auth' element = {<><Auth /></>}/>
 
-            <Route
-              path='/mall-info'
-              element = {
-                <>
-                  <MallProfile />
-                </>
-              }
-            />
+            <Route path='/mall-info' element = {<><MallProfile /></>}/>
+            <Route path='/store-info/:id' element = {<><StoreProfile /></>}/>
 
             <Route
               path='/news'

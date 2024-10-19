@@ -1,0 +1,41 @@
+.store-profile {
+    max-width: 70%;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    direction: rtl;
+    position: relative;
+    z-index: 999;
+}
+
+.store-profile h1 {
+    font-size: 34px;
+    color: #000000;
+    margin-bottom: 15px;
+}
+
+.store-profile img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.store-profile p {
+    font-size: 20px;
+    color: #000000;
+    margin: 5px 0;
+}
+
+.store-profile strong {
+    color: #000000;
+}
+
+#store-profile{
+    width: 97%;
+    margin: auto;
+}

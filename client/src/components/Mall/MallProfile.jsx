@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
 import LocationMap from './LocationMap.jsx';
+
 import '../../CSS/MallProfile.css';
+
 import { FaArrowCircleDown } from "react-icons/fa";
 
 import Logo from '/icons/MallStackTitledCleared.png'
@@ -38,6 +42,7 @@ const MallProfile = ({ selectedMall }) => {
                         <img src={store.image} alt={store.name} className="store-image" />
                         <h3>{store.name}</h3>
                         <p>{store.description}</p>
+                        <Link to={`/store-info/${store.id}`} className='storelink' target='_blank'>تفاصيل المحل</Link>
                     </div>
                 ))}
             </div> <br /> <hr /> <br />
