@@ -24,6 +24,10 @@ import ProductsPage from './dashboard/Admin/Pages/Products';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 
+
+
+import MallProfile from './pages/MallProfilePage';
+
 function App() {
 
   return (
@@ -54,6 +58,16 @@ function App() {
                 </>
               }
             />
+
+            <Route
+              path='/mall-info'
+              element = {
+                <>
+                  <MallProfile />
+                </>
+              }
+            />
+
             <Route
               path='/news'
               element = {

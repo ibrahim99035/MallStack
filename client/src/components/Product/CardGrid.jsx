@@ -42,7 +42,7 @@ const CardGrid = () => {
         {data.map((card, index) => (
           <Card
             key={index}
-            image={`data:image/png;base64,${card.coverImage}`} // Ensure base64 is handled properly
+            image={card.coverImage}
             title={card.name}
             description={card.description}
           />

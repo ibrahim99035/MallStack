@@ -1,10 +1,17 @@
 const Product = require('../models/Product');
 
-const { imageToBase64, base64ToImage } = require('../utils/uploadHelper');
+const cloudinary = require('cloudinary').v2; 
 
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
+
+// Cloudinary Configuration
+cloudinary.config({ 
+    cloud_name: 'dbthng8q2', 
+    api_key: '349181398314425', 
+    api_secret: process.env.CLOUDINARY_API_SECRET 
+});
 
 // Set up multer for file upload
 const storage = multer.diskStorage({
@@ -25,9 +32,15 @@ const createProduct = async (req, res) => {
 
     let coverImage = '';
     if (req.file) {
-        const imagePath = path.join(__dirname, '../uploads', req.file.filename);
-        coverImage = imageToBase64(imagePath);
-        fs.unlinkSync(imagePath); // Optional: delete the image after converting to base64
+        try {
+            const uploadResult = await cloudinary.uploader.upload(req.file.path, {
+                public_id: `products/${Date.now()}-${req.file.originalname}`, // specify a public ID
+            });
+            coverImage = uploadResult.secure_url; // Get the secure URL of the uploaded image
+            fs.unlinkSync(req.file.path); // delete the image after uploading
+        } catch (error) {
+            return res.status(500).json({ message: 'Error uploading image to Cloudinary', error });
+        }
     }
 
     const product = new Product({
@@ -42,7 +55,7 @@ const createProduct = async (req, res) => {
         const createdProduct = await product.save();
         res.status(201).json(createdProduct);
     } catch (error) {
-        res.status(400).json({ message: 'Error creating Store', error });
+        res.status(400).json({ message: 'Error creating product', error });
     }
 };
 
@@ -69,7 +82,7 @@ const getProductById = async (req, res) => {
 
 // Update a product (only allow if the user is the creator or an admin)
 const updateProduct = async (req, res) => {
-    const { name, description, relatedStore, coverImage } = req.body;
+    const { name, description, relatedStore } = req.body;
 
     const product = await Product.findById(req.params.id);
 
@@ -81,11 +94,17 @@ const updateProduct = async (req, res) => {
         product.name = name || product.name;
         product.description = description || product.description;
         product.relatedStore = relatedStore || product.relatedStore;
-        
+
         if (req.file) {
-            const imagePath = path.join(__dirname, '../uploads', req.file.filename);
-            product.coverImage = imageToBase64(imagePath);
-            fs.unlinkSync(imagePath); 
+            try {
+                const uploadResult = await cloudinary.uploader.upload(req.file.path, {
+                    public_id: `products/${Date.now()}-${req.file.originalname}`, // Optional: specify a public ID
+                });
+                product.coverImage = uploadResult.secure_url; // Get the secure URL of the uploaded image
+                fs.unlinkSync(req.file.path); // Optional: delete the image after uploading
+            } catch (error) {
+                return res.status(500).json({ message: 'Error uploading image to Cloudinary', error });
+            }
         }
 
         const updatedProduct = await product.save();
