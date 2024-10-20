@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import ProductModal from '../../dashboard/Admin/components/CustomModal';
+import { fetchProductById } from '../../API/product/getproduct';
 
-const ProductProfileComponent = () =>{
+const ProductProfileComponent = (productId) =>{
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const [failure, setFailure] = useState(false);
-    const [modopen, setModopen] = useState(false);
     
 };
 

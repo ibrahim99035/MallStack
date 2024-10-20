@@ -1,32 +1,36 @@
 import React, { useState, useEffect } from 'react';
-
 import { useParams } from 'react-router-dom';
-
 import { FaArrowCircleDown } from "react-icons/fa";
-
-import { fetchProducts } from '../../API/product/getproducts';
-import { fetchProductById } from '../../API/product/getproduct';
-
+import { fetchProductsByStore } from '../../API/product/getProductByStore';
 import '../../CSS/StoreProfile.css';
 
-import Products from '../Product/CardGrid';
 import CustomModal from '../../dashboard/Admin/components/CustomModal';
+import ProductInfo from '../Product/ProductInfo';
 
 const StoreProfile = () => {
-
     const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false)
     const [selectedProduct, setSelectedProduct] = useState(null);
+    
+    const { id } = useParams();  // Get the id from the route
 
     useEffect(() => {
         fetchTheProducts();
-    }, []);
+    }, [id]);
 
     const fetchTheProducts = async () => {
-        const data = await fetchProducts();
-        setProducts(data);
+        try {
+            setLoading(true);
+            const data = await fetchProductsByStore('66f94d5c48654bd84c29f72b');  // Use dynamic store id
+            setProducts(data);
+            setLoading(false);
+        } catch (err) {
+            setError('Failed to fetch products');
+            setLoading(false);
+        }
     };
-    
-    const { id } = useParams();  // Get the id from the route
 
     // Hardcoded store data for now
     const persoudo_stores = [
@@ -45,6 +49,14 @@ const StoreProfile = () => {
         return <h2>Store not found</h2>;  // Handle case when store is not found
     }
 
+    if (loading) return <p>Loading products...</p>;
+    if (error) return <p>{error}</p>;
+
+    const handleClick = (product) => {
+        setSelectedProduct(product); // Set selected user for status change
+        setIsModalOpen(true); // Open the status confirmation modal
+    };
+
     return (
         <>
             <div className="store-profile">
@@ -55,8 +67,33 @@ const StoreProfile = () => {
                 <p><strong>{store.openingTime}</strong></p>
                 <p><FaArrowCircleDown /></p>
                 <p><strong>{store.closingTime}</strong></p>
-            </div> <br /> <hr id='store-profile' /> <br />
-            <Products />
+            </div> 
+            <br /> <hr id='store-profile' /> <br />
+            
+            <div id='storeProducts'>
+                <h2>الأثاث المتوفر</h2>
+                <div className="product-grid">
+                    {products.length > 0 ? (
+                        products.map((product) => (
+                            <div key={product._id} className="product-card" onClick={() => handleClick(product)}>
+                                <img src={product.coverImage} alt={product.name} />
+                                <h3>{product.name}</h3>
+                                <p>{product.description}</p>
+                            </div>
+                        ))
+                    ) : (
+                        <p>No products available for this store.</p>
+                    )}
+                </div>
+            </div>
+            
+            <CustomModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)} // Close the edit modal
+                content={
+                    <ProductInfo product= {selectedProduct}/>
+                }
+            />
         </>
     );
 };
