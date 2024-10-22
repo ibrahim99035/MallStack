@@ -59,7 +59,7 @@ const MallProfile = ({ selectedMall }) => {
                         </div>
                     </div>
                 </div>
-                <LocationMap tehselectedMall={selectedMall} /> 
+                <LocationMap tehselectedMall={selectedMall} id= 'maponprofile'/> 
             </div>
             
             <br /> <hr />

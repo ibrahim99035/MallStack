@@ -76,15 +76,58 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) { /* For tablets and smaller devices */
-    .stores-container {
-        grid-template-columns: repeat(1, 1fr); /* 2 cards in a row */
+
+/* Tablet and smaller devices */
+@media (max-width: 768px) { 
+
+    .mall-details {
+        flex-direction: column; /* Stack mall details vertically on smaller screens */
+        width: 100%; /* Use full width */
     }
-    
+
+    .stores-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 cards in a row */
+        padding-left: 0; /* Remove padding for better fit */
+        padding-right: 0;
+    }
+
+    #LogoHolderMall {
+        max-width: 150px; /* Reduce logo size for tablets */
+    }
+
+    .mall-image img {
+        max-width: 200px; /* Smaller image on tablet */
+    }
 }
 
-@media (max-width: 480px) { /* For mobile devices */
+/* Mobile devices */
+@media (max-width: 480px) { 
+    #maponprofile{
+        display: none;
+    }
+    .mall-details {
+        width: 100%;
+        flex-direction: column; /* Stack mall details vertically */
+        margin-right: 0; /* Remove extra margin */
+    }
+
     .stores-container {
         grid-template-columns: 1fr; /* 1 card in a row */
+        padding: 0; /* Remove padding */
+    }
+
+    .store-card {
+        padding: 5px; /* Reduce padding for smaller screens */
+    }
+
+    #LogoHolderMall { /* Smaller logo on mobile */
+        margin: auto;
+    }
+    #LogoHolderMall img{
+        width: 100px;
+    }
+
+    .mall-image img {
+        max-width: 150px; /* Smaller image on mobile */
     }
 }
