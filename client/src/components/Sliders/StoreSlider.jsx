@@ -52,7 +52,7 @@ const StoreSlider = () => {
           <img src="https://images.squarespace-cdn.com/content/v1/62e7a92f066fa3730dcd4604/7e207a8b-a472-4865-b685-a9852319c37d/v2-92wtf-rccbx.jpg" alt="Slide 5" />
         </div>
       </Slider>
-      <a href="/malls" className="slider-button">المزيد</a>
+      <a href="/stores" className="slider-button">المزيد</a>
     </div>
   );
 };

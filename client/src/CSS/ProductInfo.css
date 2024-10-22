@@ -9,7 +9,8 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
     max-width: 500px;
-    height: 80vh;
+    width: 100%; /* Make sure it scales properly */
+    height: auto; /* Change to auto for better fit on smaller screens */
     margin: 0 auto;
 }
 
@@ -19,6 +20,7 @@
     color: #333; /* Dark color for readability */
     margin-bottom: 15px;
     font-weight: bold;
+    text-align: center;
 }
 
 /* Style for the Product Description */
@@ -39,9 +41,67 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Add some depth with shadow */
 }
 
-
-.product-profile-main-container{
+/* Main container for product profile (flexbox) */
+.product-profile-main-container {
     display: flex;
     flex-direction: row;
+    justify-content: center; /* Center the content */
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap; /* Ensure it wraps on smaller screens */
+    margin: 20px auto;
 }
 
+/* Responsive adjustments */
+
+/* Tablet and smaller devices */
+@media (max-width: 768px) {
+    .product-details {
+        max-width: 100%; /* Use full width on tablets */
+        padding: 15px; /* Slightly reduce padding */
+        margin: 10px auto;
+    }
+
+    .product-details h1 {
+        font-size: 24px; /* Adjust font size for smaller screens */
+    }
+
+    .product-details p {
+        font-size: 16px; /* Slightly smaller text on tablets */
+    }
+
+    .product-details img {
+        max-width: 150px; /* Reduce image size */
+    }
+
+    .product-profile-main-container {
+        flex-direction: column; /* Stack items on top of each other */
+        align-items: center; /* Center the items */
+        gap: 10px; /* Reduce gap */
+    }
+}
+
+/* Mobile devices */
+@media (max-width: 480px) {
+    .product-details {
+        padding: 10px;
+    }
+
+    .product-details h1 {
+        font-size: 22px; /* Smaller heading */
+    }
+
+    .product-details p {
+        font-size: 14px; /* Smaller text for mobile */
+    }
+
+    .product-details img {
+        max-width: 120px; /* Reduce image size on mobile */
+    }
+
+    .product-profile-main-container {
+        flex-direction: column;
+        align-items: center;
+        width: 100%; /* Ensure full width on mobile */
+    }
+}
