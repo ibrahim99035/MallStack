@@ -25,6 +25,7 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 
 import MallProfile from './pages/MallProfilePage';
+import MallsPagePublic from './pages/Malls';
 import StoreProfile from './pages/StoreProfilePage';
 
 function App() {
@@ -44,7 +45,8 @@ function App() {
 
             <Route path='/auth' element = {<><Auth /></>}/>
 
-            <Route path='/mall-info' element = {<><MallProfile /></>}/>
+            <Route path='/malls' element = {<><MallsPagePublic /></>}/>
+            <Route path='/mall-info/:id' element = {<><MallProfile /></>}/>
             <Route path='/store-info/:id' element = {<><StoreProfile /></>}/>
 
             <Route

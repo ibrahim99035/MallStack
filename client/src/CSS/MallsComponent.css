@@ -1,0 +1,59 @@
+/* Style for the product grid */
+.mall-profile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+    gap: 20px;  /* Space between the cards */
+    margin-top: 20px;
+}
+
+/* Style for individual product cards */
+#storemall-profile{
+    width: 90%;
+    margin: auto;
+    margin-bottom: 35px;
+    position: relative;
+    z-index: 999;
+}
+
+#storemall-profile h2{
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    margin-top: -10px;
+}
+
+.mall-profile-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px #000000;
+    transition: transform 0.2s;
+    cursor: pointer;
+    direction: rtl;
+    text-align: center;
+    position: relative;
+    z-index: 999;
+}
+
+.mall-profile-card:hover {
+    transform: translateY(-15px); /* Slight hover effect */
+}
+
+.mall-profile-card img {
+    width: 100%;
+    height: 200px; /* Set a fixed height for product images */
+    object-fit: cover; /* Ensure the image covers the container */
+}
+
+.mall-profile-card h3 {
+    font-size: 1.25rem;
+    margin: 10px;
+    color: #000000;
+}
+
+.mall-profile-card p {
+    font-size: 1rem;
+    margin: 10px;
+    color: #000000;
+}

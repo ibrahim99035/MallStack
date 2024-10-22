@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
@@ -10,24 +11,48 @@ import { FaArrowCircleDown } from "react-icons/fa";
 
 import Logo from '/icons/MallStackTitledCleared.png'
 
+import { fetchStoresByMall } from '../../API/store/getStoresByMall.js';
+
 const MallProfile = ({ selectedMall }) => {
+    const [stores, setStores] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+  
+
+    useEffect(() => {
+        fetchTheStoresByMall();
+    }, []);
+
+
+    const fetchTheStoresByMall = async () => {
+        try {
+            setLoading(true);
+            const data = await fetchStoresByMall(selectedMall._id);
+            setStores(data);
+            setLoading(false);
+        } catch (err) {
+            setError('Failed to fetch The Mall');
+            setLoading(false);
+        }
+    };
+
     return (
         <div className="mall-profile">
             <h1>{selectedMall.name}</h1>
             <div id='MallComponentProfile'>
                 <div className="mall-details" style={{
-                    backgroundImage: `url(${selectedMall.image})`,
+                    backgroundImage: `url(${selectedMall.coverImage})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat'
                 }}>
                     <div className="mall-info">
                         <p>{selectedMall.address}</p>
-                        <p>{selectedMall.openingTime}</p>
+                        <p>{selectedMall.openingDate}</p>
                         <p><FaArrowCircleDown/></p>
-                        <p>{selectedMall.closingTime}</p>
+                        <p>{selectedMall.closingDate}</p>
                         <div className="mall-image">
-                            <img src={selectedMall.image} alt={`${selectedMall.name}`} />
+                            <img src={selectedMall.coverImage} alt={`${selectedMall.name}`} />
                         </div>
                     </div>
                 </div>
@@ -37,12 +62,12 @@ const MallProfile = ({ selectedMall }) => {
             <br /> <hr />
             <h2 style={{textAlign:'center', color:'white', fontSize:'30px'}}>المحلات في المول</h2>
             <div className="stores-container">
-                {selectedMall.stores.map((store) => (
+                {stores.map((store) => (
                     <div className="store-card" key={store.name}>
-                        <img src={store.image} alt={store.name} className="store-image" />
+                        <img src={store.coverImage} alt={store.name} className="store-image" />
                         <h3>{store.name}</h3>
                         <p>{store.description}</p>
-                        <Link to={`/store-info/${store.id}`} className='storelink' target='_blank'>تفاصيل المحل</Link>
+                        <Link to={`/store-info/${store._id}`} className='storelink' target='_blank'>تفاصيل المحل</Link>
                     </div>
                 ))}
             </div> <br /> <hr /> <br />
@@ -57,19 +82,9 @@ MallProfile.propTypes = {
     selectedMall: PropTypes.shape({
         name: PropTypes.string.isRequired,
         address: PropTypes.string.isRequired,
-        openingTime: PropTypes.string.isRequired,
-        closingTime: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
-        stores: PropTypes.arrayOf(
-            PropTypes.shape({
-                name: PropTypes.string.isRequired,
-                description: PropTypes.string.isRequired,
-                address: PropTypes.string.isRequired,
-                openingTime: PropTypes.string.isRequired,
-                closingTime: PropTypes.string.isRequired,
-                image: PropTypes.string.isRequired,
-            })
-        ).isRequired,
+        openingDate: PropTypes.string.isRequired,
+        closingDate: PropTypes.string.isRequired,
+        coverImage: PropTypes.string.isRequired,
         location: PropTypes.string.isRequired, // For LocationMap
     }).isRequired,
 };
