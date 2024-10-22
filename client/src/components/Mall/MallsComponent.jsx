@@ -13,6 +13,10 @@ const MallsComponent = () => {
         fetchTheMalls();
     }, []);
 
+    function navigateTo(route) {
+        window.location.href = route;
+    }
+
     const fetchTheMalls = async () => {
         try {
             setLoading(true);
@@ -36,7 +40,11 @@ const MallsComponent = () => {
                 <div className="mall-profile-grid">
                     {malls.length > 0 ? (
                         malls.map((mall) => (
-                            <div key={mall._id} className="mall-profile-card">
+                            <div
+                                key={mall._id}
+                                className="mall-profile-card"
+                                onClick={() => navigateTo(`/mall-info/${mall._id}`)} 
+                            >
                                 <img src={mall.coverImage} alt={mall.name} />
                                 <h3>{mall.name}</h3>
                                 <p>{mall.address}</p>

@@ -27,6 +27,7 @@ import store from './redux/store';
 import MallProfile from './pages/MallProfilePage';
 import MallsPagePublic from './pages/Malls';
 import StoreProfile from './pages/StoreProfilePage';
+import StoresPagePublic from './pages/PublicStoresPage';
 
 function App() {
 
@@ -47,6 +48,7 @@ function App() {
 
             <Route path='/malls' element = {<><MallsPagePublic /></>}/>
             <Route path='/mall-info/:id' element = {<><MallProfile /></>}/>
+            <Route path='/stores' element = {<><StoresPagePublic /></>}/>
             <Route path='/store-info/:id' element = {<><StoreProfile /></>}/>
 
             <Route

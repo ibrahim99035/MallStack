@@ -23,6 +23,9 @@ const MallProfile = ({ selectedMall }) => {
         fetchTheStoresByMall();
     }, []);
 
+    function navigateTo(route) {
+        window.location.href = route;
+    }
 
     const fetchTheStoresByMall = async () => {
         try {
@@ -63,8 +66,8 @@ const MallProfile = ({ selectedMall }) => {
             <h2 style={{textAlign:'center', color:'white', fontSize:'30px'}}>المحلات في المول</h2>
             <div className="stores-container">
                 {stores.map((store) => (
-                    <div className="store-card" key={store.name}>
-                        <img src={store.coverImage} alt={store.name} className="store-image" />
+                    <div className="store-card" key={store.name} onClick={() => navigateTo(`/mall-info/${mall._id}`)}>
+                        <img src={store.coverImage} alt={store.name} className="store-image" loading='lazy' />
                         <h3>{store.name}</h3>
                         <p>{store.description}</p>
                         <Link to={`/store-info/${store._id}`} className='storelink' target='_blank'>تفاصيل المحل</Link>
