@@ -1,6 +1,8 @@
 import React from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
+import { RequireAuth } from 'react-auth-kit';
+
 import HomePage from './pages/HomePage';
 import Auth from './pages/Auth';
 import AboutUs from './pages/AboutUs';

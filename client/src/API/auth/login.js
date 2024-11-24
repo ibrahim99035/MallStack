@@ -15,9 +15,7 @@ export const loginUser = async (credentials) => {
             throw new Error(error.message || 'Login failed');
         }
         const data = await response.json();
-        // Store token in local storage
-        localStorage.setItem('token', data.token);
-        return data;
+        return data;  
     } catch (error) {
         throw new Error(error.message);
     }
