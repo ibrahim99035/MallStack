@@ -28,8 +28,18 @@ const CardGrid = () => {
   }, []);
 
   if (loading) {
-    return <div id='loadingDiv'>Loading...</div>;
+    return (
+      <div className="card-grid">
+        {[...Array(6)].map((_, index) => (
+          <div key={index} className="card-skeleton">
+            <div className="skeleton-image"></div>
+            <div className="skeleton-text"></div>
+          </div>
+        ))}
+      </div>
+    );
   }
+  
 
   if (error) {
     return <div id='errorDiv'>Error: {error}</div>;
