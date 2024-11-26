@@ -1,5 +1,5 @@
 const BASE_URL = "https://backroomsbridge.onrender.com/api";
-
+const LOCAL_HOST = "http://127.0.0.1:5000/api";
 // Fetch all stores
 export const fetchStores = async () => {
     try {

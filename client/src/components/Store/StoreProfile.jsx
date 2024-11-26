@@ -9,6 +9,7 @@ import '../../CSS/StoreProfile.css';
 
 import CustomModal from '../../dashboard/Admin/components/CustomModal';
 import ProductInfo from '../Product/ProductInfo';
+import StyledVideoComponent from './vidcomp';
 
 const StoreProfile = () => {
     const [products, setProducts] = useState([]);
@@ -90,6 +91,8 @@ const StoreProfile = () => {
                     )}
                 </div>
             </div>
+            
+            {store.name === 'معرض الكوخ الخشبي' && <StyledVideoComponent />}
             
             <CustomModal
                 isOpen={isModalOpen}
